@@ -147,7 +147,7 @@ try:
             last_page = time.time()
 
         # One mode for each variable
-        if mode == 0:
+        if True:
             # variable = "temperature"
             unit = "C"
             cpu_temp = get_cpu_temperature()
@@ -157,23 +157,26 @@ try:
             raw_temp = bme280.get_temperature()
             data = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
             reading[variables[mode]].append(data)
+        if mode == 0:
             display_text(variables[mode], data, unit)
 
-        if mode == 1:
+        if True:
             # variable = "pressure"
             unit = "hPa"
             data = bme280.get_pressure()
             reading[variables[mode]].append(data)
+        if mode == 1:
             display_text(variables[mode], data, unit)
 
-        if mode == 2:
+        if True:
             # variable = "humidity"
             unit = "%"
             data = bme280.get_humidity()
             reading[variables[mode]].append(data)
+        if mode == 2:
             display_text(variables[mode], data, unit)
 
-        if mode == 3:
+        if True:
             # variable = "light"
             unit = "Lux"
             if proximity < 10:
@@ -181,33 +184,37 @@ try:
             else:
                 data = 1
             reading[variables[mode]].append(data)
+        if mode == 3:
             display_text(variables[mode], data, unit)
 
-        if mode == 4:
+        if True:
             # variable = "oxidised"
             unit = "kO"
             data = gas.read_all()
             data = data.oxidising / 1000
             reading[variables[mode]].append(data)
+        if mode == 4:
             display_text(variables[mode], data, unit)
 
-        if mode == 5:
+        if True:
             # variable = "reduced"
             unit = "kO"
             data = gas.read_all()
             data = data.reducing / 1000
             reading[variables[mode]].append(data)
+        if mode == 5:
             display_text(variables[mode], data, unit)
 
-        if mode == 6:
+        if True:
             # variable = "nh3"
             unit = "kO"
             data = gas.read_all()
             data = data.nh3 / 1000
             reading[variables[mode]].append(data)
+        if mode == 6:
             display_text(variables[mode], data, unit)
 
-        if mode == 7:
+        if True:
             # variable = "pm1"
             unit = "ug/m3"
             try:
@@ -217,9 +224,10 @@ try:
             else:
                 data = float(data.pm_ug_per_m3(1.0))
                 reading[variables[mode]].append(data)
-                display_text(variables[mode], data, unit)
+                if mode == 7:
+                    display_text(variables[mode], data, unit)
 
-        if mode == 8:
+        if True:
             # variable = "pm25"
             unit = "ug/m3"
             try:
@@ -229,9 +237,10 @@ try:
             else:
                 data = float(data.pm_ug_per_m3(2.5))
                 reading[variables[mode]].append(data)
-                display_text(variables[mode], data, unit)
+                if mode == 8:
+                    display_text(variables[mode], data, unit)
 
-        if mode == 9:
+        if True:
             # variable = "pm10"
             unit = "ug/m3"
             try:
@@ -241,7 +250,8 @@ try:
             else:
                 data = float(data.pm_ug_per_m3(10))
                 reading[variables[mode]].append(data)
-                display_text(variables[mode], data, unit)
+                if mode == 9:
+                    display_text(variables[mode], data, unit)
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
             print(reading)
