@@ -54,7 +54,7 @@ st7735 = ST7735.ST7735(
 st7735.begin()
 
 RECORD_SECONDS_INTERVAL = 60
-CSV_LOG_FILE = 'reading_log.csv'
+CSV_LOG_FILE = '../reading_data.csv'
 WIDTH = st7735.width
 HEIGHT = st7735.height
 
