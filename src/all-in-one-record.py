@@ -54,7 +54,7 @@ st7735 = ST7735.ST7735(
 st7735.begin()
 
 RECORD_SECONDS_INTERVAL = 60
-CSV_LOG_FILE = f'../reading_data{time.time()}.csv'
+CSV_LOG_FILE = f'../reading_data{time.strftime("%Y_%m_%d_%H_%M_%S", time.time())}.csv'
 WIDTH = st7735.width
 HEIGHT = st7735.height
 
@@ -134,6 +134,9 @@ last_record_time = int(time.time())-55
 for v in variables:
     values[v] = [1] * WIDTH
 
+with open(CSV_LOG_FILE, 'w') as csvfile: 
+    writer = csv.DictWriter(csvfile, fieldnames = variables) 
+    writer.writeheader()
 # The main loop
 try:
     while True:
@@ -254,12 +257,10 @@ try:
                     display_text(variables[mode], data, unit)
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
-            print(reading)
             reading_avg = {k: np.mean(reading[k]) for k in reading.keys()}
-            print(reading_avg)
             with open(CSV_LOG_FILE, 'w') as csvfile: 
                 writer = csv.DictWriter(csvfile, fieldnames = variables) 
-                writer.writeheader()
+                # writer.writeheader()
                 writer.writerow(reading_avg) 
             reading = {k: [] for k in variables}
 
