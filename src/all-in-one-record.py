@@ -54,7 +54,7 @@ st7735 = ST7735.ST7735(
 st7735.begin()
 
 RECORD_SECONDS_INTERVAL = 60
-CSV_LOG_FILE = f'../reading_data{time.strftime("%Y_%m_%d_%H_%M_%S", time.time())}.csv'
+CSV_LOG_FILE = f'../data/reading_data{time.strftime("%Y_%m_%d_%H_%M_%S", time.time())}.csv'
 WIDTH = st7735.width
 HEIGHT = st7735.height
 
