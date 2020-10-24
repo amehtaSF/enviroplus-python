@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+
+from datetime import datetime
 import csv
 import numpy as np
 import time
@@ -54,7 +56,7 @@ st7735 = ST7735.ST7735(
 st7735.begin()
 
 RECORD_SECONDS_INTERVAL = 60
-CSV_LOG_FILE = f'../data/reading_data{time.strftime("%Y_%m_%d_%H_%M_%S", time.time())}.csv'
+CSV_LOG_FILE = '../data/reading_data_{}.csv'.format(datetime.now().strftime("%Y%m%d_%H%M%S"))
 WIDTH = st7735.width
 HEIGHT = st7735.height
 
@@ -129,7 +131,7 @@ variables = ["temperature",
 values = {}
 
 reading = {k: [] for k in variables}
-last_record_time = int(time.time())-55
+last_record_time = int(time.time())
 
 for v in variables:
     values[v] = [1] * WIDTH
@@ -258,12 +260,12 @@ try:
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
             reading_avg = {k: np.mean(reading[k]) for k in reading.keys()}
-            with open(CSV_LOG_FILE, 'w') as csvfile: 
+            with open(CSV_LOG_FILE, 'a') as csvfile: 
                 writer = csv.DictWriter(csvfile, fieldnames = variables) 
                 # writer.writeheader()
                 writer.writerow(reading_avg) 
             reading = {k: [] for k in variables}
-
+            last_record_time = time.time()
 
 # Exit cleanly
 except KeyboardInterrupt:
