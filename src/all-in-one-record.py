@@ -54,7 +54,7 @@ st7735 = ST7735.ST7735(
 st7735.begin()
 
 RECORD_SECONDS_INTERVAL = 60
-CSV_LOG_FILE = '../reading_data.csv'
+CSV_LOG_FILE = f'../reading_data{time.time()}.csv'
 WIDTH = st7735.width
 HEIGHT = st7735.height
 
@@ -256,10 +256,11 @@ try:
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
             print(reading)
             reading_avg = {k: np.mean(reading[k]) for k in reading.keys()}
+            print(reading_avg)
             with open(CSV_LOG_FILE, 'w') as csvfile: 
-                writer = csv.DictWriter(csvfile, fieldnames = reading_avg.keys()) 
+                writer = csv.DictWriter(csvfile, fieldnames = variables) 
                 writer.writeheader()
-                writer.writerows(reading_avg) 
+                writer.writerow(reading_avg) 
             reading = {k: [] for k in variables}
 
 
