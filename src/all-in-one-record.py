@@ -129,7 +129,7 @@ variables = ["temperature",
 values = {}
 
 reading = {k: [] for k in variables}
-last_record_time = int(time.time())
+last_record_time = int(time.time())-55
 
 for v in variables:
     values[v] = [1] * WIDTH
@@ -244,6 +244,7 @@ try:
                 display_text(variables[mode], data, unit)
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
+            print(reading)
             reading_avg = {k: np.mean(v) for k, v in reading}
             with open(CSV_LOG_FILE, 'w') as csvfile: 
                 writer = csv.DictWriter(csvfile, fieldnames = reading_avg.keys()) 
