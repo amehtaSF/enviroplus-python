@@ -137,10 +137,12 @@ last_record_time = int(time.time())
 for v in variables:
     values[v] = [1] * WIDTH
 
+# Create header of new CSV file
 csv_header = variables
 with open(CSV_LOG_FILE, 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = csv_header) 
     writer.writeheader()
+
 # The main loop
 try:
     while True:
