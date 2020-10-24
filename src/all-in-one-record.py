@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import csv
-
+import numpy as np
 import time
 import colorsys
 import sys
@@ -245,7 +245,7 @@ try:
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
             print(reading)
-            reading_avg = {k: np.mean(v) for k, v in reading}
+            reading_avg = {k: np.mean(reading[k]) for k in reading.keys()}
             with open(CSV_LOG_FILE, 'w') as csvfile: 
                 writer = csv.DictWriter(csvfile, fieldnames = reading_avg.keys()) 
                 writer.writeheader()
