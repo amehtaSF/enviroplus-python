@@ -117,7 +117,8 @@ last_page = 0
 light = 1
 
 # Create a values dict to store the data
-variables = ["temperature",
+variables = ["timestamp",
+             "temperature",
              "pressure",
              "humidity",
              "light",
@@ -136,8 +137,9 @@ last_record_time = int(time.time())
 for v in variables:
     values[v] = [1] * WIDTH
 
-with open(CSV_LOG_FILE, 'w') as csvfile: 
-    writer = csv.DictWriter(csvfile, fieldnames = variables) 
+csv_header = variables
+with open(CSV_LOG_FILE, 'w') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames = csv_header) 
     writer.writeheader()
 # The main loop
 try:
@@ -150,7 +152,11 @@ try:
             mode += 1
             mode %= len(variables)
             last_page = time.time()
-
+        
+        if True:
+            variable = "timestamp"
+            data = time.time()
+            reading[variable].append(data)
         # One mode for each variable
         if True:
             variable = "temperature"
@@ -260,8 +266,9 @@ try:
 
         if int(time.time()) > (last_record_time+RECORD_SECONDS_INTERVAL):
             reading_avg = {k: np.mean(reading[k]) for k in reading.keys()}
+            reading_avg['timestamp'] = int(time.time())
             with open(CSV_LOG_FILE, 'a') as csvfile: 
-                writer = csv.DictWriter(csvfile, fieldnames = variables) 
+                writer = csv.DictWriter(csvfile, fieldnames = csv_header) 
                 # writer.writeheader()
                 writer.writerow(reading_avg) 
             reading = {k: [] for k in variables}
