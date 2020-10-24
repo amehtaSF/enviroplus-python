@@ -148,7 +148,7 @@ try:
 
         # One mode for each variable
         if True:
-            # variable = "temperature"
+            variable = "temperature"
             unit = "C"
             cpu_temp = get_cpu_temperature()
             # Smooth out with some averaging to decrease jitter
@@ -156,66 +156,66 @@ try:
             avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
             raw_temp = bme280.get_temperature()
             data = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 0:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "pressure"
+            variable = "pressure"
             unit = "hPa"
             data = bme280.get_pressure()
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 1:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "humidity"
+            variable = "humidity"
             unit = "%"
             data = bme280.get_humidity()
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 2:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "light"
+            variable = "light"
             unit = "Lux"
             if proximity < 10:
                 data = ltr559.get_lux()
             else:
                 data = 1
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 3:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "oxidised"
+            variable = "oxidised"
             unit = "kO"
             data = gas.read_all()
             data = data.oxidising / 1000
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 4:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "reduced"
+            variable = "reduced"
             unit = "kO"
             data = gas.read_all()
             data = data.reducing / 1000
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 5:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "nh3"
+            variable = "nh3"
             unit = "kO"
             data = gas.read_all()
             data = data.nh3 / 1000
-            reading[variables[mode]].append(data)
+            reading[variable].append(data)
         if mode == 6:
             display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "pm1"
+            variable = "pm1"
             unit = "ug/m3"
             try:
                 data = pms5003.read()
@@ -223,12 +223,12 @@ try:
                 logging.warning("Failed to read PMS5003")
             else:
                 data = float(data.pm_ug_per_m3(1.0))
-                reading[variables[mode]].append(data)
+                reading[variable].append(data)
                 if mode == 7:
                     display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "pm25"
+            variable = "pm25"
             unit = "ug/m3"
             try:
                 data = pms5003.read()
@@ -236,12 +236,12 @@ try:
                 logging.warning("Failed to read PMS5003")
             else:
                 data = float(data.pm_ug_per_m3(2.5))
-                reading[variables[mode]].append(data)
+                reading[variable].append(data)
                 if mode == 8:
                     display_text(variables[mode], data, unit)
 
         if True:
-            # variable = "pm10"
+            variable = "pm10"
             unit = "ug/m3"
             try:
                 data = pms5003.read()
@@ -249,7 +249,7 @@ try:
                 logging.warning("Failed to read PMS5003")
             else:
                 data = float(data.pm_ug_per_m3(10))
-                reading[variables[mode]].append(data)
+                reading[variable].append(data)
                 if mode == 9:
                     display_text(variables[mode], data, unit)
 
