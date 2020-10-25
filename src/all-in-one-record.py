@@ -157,6 +157,7 @@ try:
         
         if True:
             variable = "timestamp"
+            unit = ""
             data = time.time()
             reading[variable].append(data)
         # One mode for each variable
