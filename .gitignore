@@ -20,4 +20,4 @@ library/debian/
 .tox
 .vscode/
 venv/
-.idea
+.idea/
