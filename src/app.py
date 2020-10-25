@@ -19,8 +19,8 @@ units = {k: v for k, v in variable_units}
 def print_urls():
     output = []
     for var, unit in variable_units:
-        output.append(f'<a href=/plot?var={var}&unit={unit}')
-    return '\n'.join(output)
+        output.append(f'<a href="/plot?var={var}&unit={unit}">{var}</a>')
+    return '<br/>'.join(output)
 
 @app.route('/')
 def index():
