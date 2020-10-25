@@ -2,8 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 
-DATA_FILE = '../data/reading_data_20201024_072314.csv'
-
+DATA_FILE = '../data/reading_data_20201025_110239.csv'
 
 df = pd.read_csv(DATA_FILE)
 
